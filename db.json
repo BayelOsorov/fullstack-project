@@ -1,0 +1,36 @@
+{
+  "products": [
+    {
+      "name": "wehjrgejhrggjhgj",
+      "description": "gjhgjhgjjhgjhg",
+      "price": 6868686,
+      "image": "jhjkgdjgjhdgjf",
+      "brand": "lamp",
+      "id": 1
+    },
+    {
+      "name": "weh534jrgejhrggjhgj",
+      "description": "gjhgjhgjjhgjhg",
+      "price": 6868686,
+      "image": "jhjkgdjgjhdgjf",
+      "brand": "lamp",
+      "id": 144
+    },
+    {
+      "name": "weh435jrgejhrggjhgj",
+      "description": "gjhgjhgjjhgjhg",
+      "price": 6868686,
+      "image": "jhjkgdjgjhdgjf",
+      "brand": "lamp",
+      "id": 1534
+    },
+    {
+      "name": "wehjrgejhrggjhgj",
+      "description": "gjhgjhgjjhgjhg",
+      "price": 6868686,
+      "image": "jhjkgdjgjhdgjf",
+      "brand": "lamp",
+      "id": 134
+    }
+  ]
+}

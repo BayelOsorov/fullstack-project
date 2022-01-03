@@ -1,0 +1,13 @@
+@import '../components/main-page-content/Navbar/assets/navbar.css' ;
+@import '../components/main-page-content/Header/assets/header.css';
+* {
+    padding: 0;
+    margin: 0;
+}
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+.h-100 {
+    height: 100%;
+}

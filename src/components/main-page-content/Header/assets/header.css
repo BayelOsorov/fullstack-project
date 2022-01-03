@@ -1,0 +1,305 @@
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@1,400;1,500;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Niconne&display=swap");
+.header {
+  background-image: url("../../../../utils/images/bg3.webp");
+  background-repeat: no-repeat;
+}
+
+.header_inner {
+  text-align: center;
+  border: 20px solid #fff;
+  padding: 120px 0 120px 0;
+  color: #fff;
+}
+
+@media screen and (max-width: 426px) {
+  .header_inner {
+    padding: 50px 0 50px 0;
+  }
+}
+
+.header_inner button {
+  background-color: unset;
+  font-family: "EB Garamond", serif;
+  padding: 10px 45px 10px 45px;
+  font-size: 16px;
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+.header_inner button:hover {
+  background-color: #fff;
+  -webkit-transition-duration: 1s;
+          transition-duration: 1s;
+  cursor: pointer;
+  color: black;
+}
+
+.header-item1 {
+  font-family: "EB Garamond", serif;
+  font-size: 14px;
+  letter-spacing: 0.5em;
+  margin-bottom: 70px;
+}
+
+.header-item2 {
+  margin-bottom: 70px;
+}
+
+.header-item2 p {
+  font-family: "Niconne", cursive;
+  font-size: 62px;
+}
+
+.header-item2 h1 {
+  font-family: "Anton", sans-serif;
+  font-size: 61px;
+  letter-spacing: 0.1em;
+}
+
+@media screen and (max-width: 426px) {
+  .header-item2 h1, .header-item2 p {
+    font-size: 30px;
+  }
+}
+
+.header-con {
+  padding-bottom: 100px;
+}
+
+.new-in {
+  border-bottom: 2px solid #B0A171;
+  margin-top: 100px;
+  color: #B0A171;
+  text-align: center;
+  font-family: "EB Garamond", serif;
+}
+
+.new-in h3 {
+  font-size: 29px;
+}
+
+.new-in strong {
+  font-size: 15px;
+}
+
+.new-in p {
+  color: #4D4B4B;
+  font-size: 16px;
+  padding-top: 15px;
+  margin-bottom: 50px;
+}
+
+.new-in button {
+  background-color: unset;
+  font-family: "EB Garamond", serif;
+  padding: 10px 45px 10px 45px;
+  font-size: 18px;
+  border: 1.5px solid #B0A171;
+  color: #B0A171;
+  margin-bottom: 15px;
+}
+
+.new-in button:hover {
+  background-color: #B0A171;
+  -webkit-transition-duration: 1s;
+          transition-duration: 1s;
+  cursor: pointer;
+  color: #fff;
+}
+
+.new-in_items {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+
+@media screen and (max-width: 768px) {
+  .new-in_items {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+}
+
+.new-in_items .new-in_item img {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.new-in_items .new-in_item p {
+  text-transform: uppercase;
+  color: #B0A171;
+  font-size: 18px;
+}
+
+.contact {
+  margin-top: 150px;
+  text-align: center;
+  font-family: "EB Garamond", serif;
+  border-bottom: 2px solid #B0A171;
+}
+
+@media screen and (max-width: 426px) {
+  .contact {
+    border: none;
+  }
+  .contact .stores-item:first-child {
+    border: none;
+  }
+}
+
+.contact_inner h3 {
+  font-size: 29px;
+  color: #B0A171;
+}
+
+.contact_inner p {
+  font-size: 16px;
+  color: #4D4B4B;
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+
+.contact_inner inputplaceholder {
+  color: #4D4B4B;
+}
+
+.contact-input {
+  display: block;
+  margin-right: 10px;
+}
+
+.contact-input input {
+  width: 280px;
+  height: 38px;
+  margin-top: 8px;
+}
+
+.contact-input input:first-child {
+  margin-top: 0;
+}
+
+.contact-input2 input {
+  height: 138px;
+  width: 280px;
+  display: block;
+}
+
+.contact-input2 button {
+  background-color: #B0A171;
+  margin-top: 10px;
+  font-family: "EB Garamond", serif;
+  padding: 10px 45px 10px 45px;
+  font-size: 18px;
+  border: 1.5px solid #B0A171;
+  margin-left: 49.7%;
+  color: #fff;
+}
+
+.contact-input2 button:hover {
+  background-color: #B0A171;
+  -webkit-transition-duration: 1s;
+          transition-duration: 1s;
+  cursor: pointer;
+  color: #fff;
+}
+
+.inputs {
+  margin-top: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.stores {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.stores-h5 {
+  color: #4D4B4B;
+  font-size: 16px;
+  margin-top: 60px;
+  margin-bottom: 20px;
+}
+
+.stores-item:first-child {
+  border-right: 2px solid #B0A171;
+  padding-right: 18%;
+  height: 70px;
+}
+
+.stores-item h6 {
+  color: #B0A171;
+  font-size: 16px;
+}
+
+.stores-item p {
+  margin-top: 16px;
+  color: #4D4B4B;
+  font-size: 16px;
+}
+
+.join {
+  text-align: center;
+  margin-top: 50px;
+  font-family: "EB Garamond", serif;
+}
+
+.join p {
+  font-size: 20px;
+  color: #B0A171;
+}
+
+.join p:last-child {
+  font-size: 16px;
+}
+
+.join input {
+  width: 60%;
+  padding: 10px 0 10px 0;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.join button {
+  background-color: #B0A171;
+  font-family: "EB Garamond", serif;
+  padding: 10px 0px 10px 0px;
+  width: 60%;
+  margin-bottom: 10px;
+  font-size: 18px;
+  border: 1.5px solid #B0A171;
+  color: #fff;
+}
+
+.join button:hover {
+  background-color: #B0A171;
+  -webkit-transition-duration: 1s;
+          transition-duration: 1s;
+  cursor: pointer;
+  color: #fff;
+}
+
+.join-items {
+  margin-bottom: 20px;
+}
+/*# sourceMappingURL=header.css.map */
