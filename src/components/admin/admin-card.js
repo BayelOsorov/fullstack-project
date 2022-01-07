@@ -17,12 +17,11 @@ import { deleteProduct, getProducts } from '../../redux/actions';
 
 const AdminCard = () => {
     const dispatch = useDispatch()
+
     useEffect(() => {
         dispatch(getProducts())
     }, [])
     const products = useSelector(state => state.products.products)
-    // console.log(products);
-    // products.map(item => console.log(item.data))
     return (
 
         <div>
@@ -31,74 +30,45 @@ const AdminCard = () => {
 
                     {
                         products.length > 0 ? (
-                            products.map(item => (
-                                item.data.map(elem => (
-                                    <Card key={elem.id} className='grid-content-card' sx={{ maxWidth: 300 }}>
-                                        <CardMedia
-                                            component="img"
-                                            alt="green iguana"
-                                            height="240"
-                                            image={elem.image}
-                                        />
-                                        <CardContent>
-                                            <p className='card-title' >
-                                                {elem.name}
-                                            </p>
-                                            <Typography variant="body2" color="text.secondary">
-                                                <strong>brand:</strong>  {elem.brand}
-                                            </Typography>
-                                            <Tooltip title={elem.description} >
-                                                <p> {elem.description.slice(0, 20)}...</p>
-                                            </Tooltip>
-                                            <Typography variant="body2" color="text.secondary">
-                                                {elem.price} com
-                                            </Typography>
-                                        </CardContent>
-                                        <CardActions className='admin-cards' >
-                                            <Button onClick={() => deleteProduct(elem.id)} variant='outlined' color='error'>Delete</Button>
-                                            <Link to={`/admin/edit/${elem.id}`}>
-                                                <Button variant='contained' >Edit</Button>
-                                            </Link>
-                                        </CardActions>
-                                    </Card>
-                                ))
+                            products.map(elem => (
+
+                                <Card key={elem.id} className='grid-content-card' sx={{ maxWidth: 300 }}>
+                                    <CardMedia
+                                        component="img"
+                                        alt="green iguana"
+                                        height="240"
+                                        image={elem.image}
+                                    />
+                                    <CardContent>
+                                        <p className='card-title' >
+                                            {elem.name}
+                                        </p>
+                                        <Typography variant="body2" color="text.secondary">
+                                            <strong>brand:</strong>  {elem.brand}
+                                        </Typography>
+                                        <Tooltip title={elem.description} >
+                                            <p> {elem.description.slice(0, 20)}...</p>
+                                        </Tooltip>
+                                        <Typography variant="body2" color="text.secondary">
+                                            {elem.price} com
+                                        </Typography>
+                                    </CardContent>
+                                    <CardActions className='admin-cards' >
+                                        <Button onClick={() => {
+                                            dispatch(deleteProduct(elem.id))
+                                            dispatch(getProducts())
+                                        }} variant='outlined' color='error'>Delete</Button>
+                                        <Link to={`/admin/edit/${elem.id}`}>
+                                            <Button variant='contained' >Edit</Button>
+                                        </Link>
+                                    </CardActions>
+                                </Card>
+
                             ))
 
-                        ) : (<h2>ggg</h2>)
+                        ) : (<h2>Loading...</h2>)
 
                     }
-                    {/* {
-                        products.map((item) => (
-                            <Card key={item.data.id} className='grid-content-card' sx={{ maxWidth: 300 }}>
-                                <CardMedia
-                                    component="img"
-                                    alt="green iguana"
-                                    height="240"
-                                    image={item.data.image}
-                                />
-                                <CardContent>
-                                    <p className='card-title' >
-                                        {item.data.name}
-                                    </p>
-                                    <Typography variant="body2" color="text.secondary">
-                                        <strong>brand:</strong>  {item.data.brand}
-                                    </Typography>
-                                    <Tooltip title={item.data.description} >
-                                        <p> {item.data.description.slice(0, 20)}...</p>
-                                    </Tooltip>
-                                    <Typography variant="body2" color="text.secondary">
-                                        {item.data.price} com
-                                    </Typography>
-                                </CardContent>
-                                <CardActions className='admin-cards' >
-                                    <Button onClick={() => deleteProduct(item.data.id)} variant='outlined' color='error'>Delete</Button>
-                                    <Link to={`/admin/edit/${item.data.id}`}>
-                                        <Button variant='contained' >Edit</Button>
-                                    </Link>
-                                </CardActions>
-                            </Card>
-                        ))
-                    } */}
                 </Grid>
             </Container >
         </div>

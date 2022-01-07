@@ -1,36 +1,48 @@
-import { CREATE_PRODUCT, DELETE_PRODUCT, GET_ONE_PRODUCT, GET_PRODUCT } from "./types"
-import axios from 'axios'
+import { CLEAR_PRODUCT, CREATE_PRODUCT, GET_ONE_PRODUCT, GET_PRODUCT } from "./types"
+
+import $axios from "../axiosConfig"
 const API = "http://localhost:8000/products"
 
 export const createProduct = (product) => {
-    axios.post(API, product)
-    return {
-        type: CREATE_PRODUCT,
-        payload: product
+    return async dispatch => {
+        await $axios.post('products/create', product)
+        dispatch({
+            type: CREATE_PRODUCT,
+            payload: product
+        })
     }
 }
 export const getProducts = () => {
     return async dispatch => {
-        const products = await axios.get(API)
+        const products = await $axios.get('products/')
         dispatch({
             type: GET_PRODUCT,
-            payload: products
+            payload: products.data.rows
         })
     }
 }
 export const getProductToEdit = (id) => {
     return async dispatch => {
-        const product = await axios(API + '/' + id)
+        const product = await $axios('products/' + id)
         dispatch({
             type: GET_ONE_PRODUCT,
-            payload: product
+            payload: product.data
         })
     }
 }
 export const deleteProduct = (id) => {
-    axios.delete(API + '/' + id)
-    // return {
-    //     type: DELETE_PRODUCT,
+    return async dispatch => {
+        await $axios.delete('products/' + id)
 
-    // }
+    }
+}
+export const saveEditedProduct = (product) => {
+    return async dispatch => {
+        await $axios.patch('products/' + product.id, product)
+    }
+}
+export const clearProduct = () => {
+    return {
+        type: CLEAR_PRODUCT
+    }
 }

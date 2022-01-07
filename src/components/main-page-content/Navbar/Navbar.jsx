@@ -14,7 +14,10 @@ import MenuItem from '@mui/material/MenuItem';
 import { Badge, InputBase, styled } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { AccountCircle } from '@mui/icons-material';
+import { logOut } from '../../../redux/user-actions';
+import { useDispatch } from 'react-redux';
 
+import LogoutIcon from '@mui/icons-material/Logout';
 //
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -59,6 +62,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Navbar(props) {
     // ! navigate
     const navigate = useNavigate()
+    let currentUser = JSON.parse(localStorage.getItem('user'))
+    const dispatch = useDispatch()
 
     // !
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -208,7 +213,7 @@ export default function Navbar(props) {
                     aria-haspopup="true"
                     color="inherit"
                 >
-                    {/* <AccountCircle /> */}
+                    <AccountCircle />
                 </IconButton>
                 <p>Профиль</p>
             </MenuItem>
@@ -331,25 +336,23 @@ export default function Navbar(props) {
                                 onClick={handleProfileMenuOpen}
                                 style={{ color: "rgba(102, 102, 102, 0.644)" }}
                             >
-                                {/* {currentUser ? (
-                                        <>
-                                            <p style={{ fontSize: '15px' }} className="text3">{currentUser.email}</p>
-                                            <LogoutIcon onClick={() => {
-                                                logout()
-                                            }} />
-                                        </>
-                                    ) : (
-                                        <Link to="/register">
+                                {currentUser ? (
+                                    <>
+                                        <p style={{ fontSize: '15px' }} className="text3">{currentUser.email}</p>
+                                        <LogoutIcon onClick={() => {
+                                            dispatch(logOut())
+                                        }} />
+                                    </>
+                                ) : (
+                                    <Link to="/register">
 
-                                            <AccountCircle
-                                                style={{ color: "rgba(169, 169, 169, 0.748)" }}
-                                            />
+                                        <AccountCircle
+                                            style={{ color: "rgba(169, 169, 169, 0.748)" }}
+                                        />
 
-                                        </Link>
-                                    )} */}
-                                <AccountCircle
-                                // style={{ color: "rgba(169, 169, 169, 0.748)" }}
-                                />
+                                    </Link>
+                                )}
+
 
                             </IconButton>
                         </Box>
