@@ -1,19 +1,18 @@
 
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import React from "react";
 import "toastify-js/src/toastify.css";
 import Toastify from "toastify-js";
 import { Link } from "react-router-dom";
-import { authContext } from "../contexts/AuthContext";
 import { useDispatch, useSelector } from "react-redux";
+import { signUpUser } from "../redux/user-actions";
 export default function RegisterPage() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false)// eslint-disable-line
-    const { signUpUser, logSuccess, errorMSG } = useContext(authContext)
     const auth = useSelector(state => state.userProducts)
     const dispatch = useDispatch()
     useEffect(() => {
@@ -33,7 +32,7 @@ export default function RegisterPage() {
                             title="close"
                         ></label>
                     </Link>
-                    <div className="text">Регистрация</div>
+                    <div className="text">Registration</div>
 
 
                     <form
@@ -64,7 +63,7 @@ export default function RegisterPage() {
                     // action="#"
                     >
                         <div className="data">
-                            <label>Ваш Email</label>
+                            <label>Email</label>
                             <input
                                 // value="email"
                                 onChange={(e) => setEmail(e.target.value)}
@@ -74,7 +73,7 @@ export default function RegisterPage() {
                             />
                         </div>
                         <div className="data">
-                            <label>Ваш Username</label>
+                            <label>Username</label>
                             <input
                                 // value="email"
                                 onChange={(e) => setUsername(e.target.value)}
@@ -108,7 +107,7 @@ export default function RegisterPage() {
 
 
                         <div className="signup-link">
-                            Уже есть аккаунт? <Link to="/login">Войти</Link>
+                            Already have account? <Link to="/login">Login</Link>
                         </div>
                     </form>
 

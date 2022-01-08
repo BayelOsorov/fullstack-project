@@ -13,10 +13,10 @@ import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 // import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { Badge, InputBase, styled } from '@mui/material';
+import { Badge, Button, InputBase, styled } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { AccountCircle } from '@mui/icons-material';
-import { getProducts, logOut } from '../../../redux/user-actions';
+import { getProducts, logOut, } from '../../../redux/user-actions';
 import { useDispatch } from 'react-redux';
 
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -259,7 +259,7 @@ export default function Navbar(props) {
                                 src=""
                                 alt="" />
                         </Typography>
-                        <Search>
+                        <Search className='search'>
                             <SearchIconWrapper>
                                 <SearchIcon />
                             </SearchIconWrapper>
@@ -346,15 +346,16 @@ export default function Navbar(props) {
                                 aria-label="account of current user"
                                 aria-controls={menuId}
                                 aria-haspopup="true"
-                                onClick={handleProfileMenuOpen}
+                                // onClick={() => dispatch(logOut())}
                                 style={{ color: "rgba(102, 102, 102, 0.644)" }}
                             >
-                                {currentUser ? (
+                                {currentUser !== null ? (
                                     <>
                                         <p style={{ fontSize: '15px' }} className="text3">{currentUser.email}</p>
-                                        <LogoutIcon onClick={() => {
+                                        <Button onClick={() => {
                                             dispatch(logOut())
-                                        }} />
+                                            navigate('/')
+                                        }}><LogoutIcon /></Button>
                                     </>
                                 ) : (
                                     <Link to="/register">

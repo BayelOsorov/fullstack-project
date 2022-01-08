@@ -10,7 +10,9 @@ const INIT_STATE = {
     countOfProducts: 0,
     user: null,
     logSuccess: false,
-    errorMSG: null
+    errorMSG: null,
+    comments: null,
+    comment: null
 }
 export const userReducer = (state = INIT_STATE, action) => {
     switch (action.type) {
@@ -38,7 +40,10 @@ export const userReducer = (state = INIT_STATE, action) => {
             return { ...state, logSuccess: action.payload }
         case "ERROR_MSG":
             return { ...state, errorMSG: action.payload }
-
+        case 'GET_COMM':
+            return { ...state, comments: action.payload }
+        case 'GET_COMM_BY_ID':
+            return { ...state, comment: action.payload }
         default:
             return state
     }

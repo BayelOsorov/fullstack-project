@@ -8,6 +8,7 @@ import { Button, Rating } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addAndDeleteProductInCart, addAndDeleteProductInFavorites, checkFavoriteInFavorites, checkProductInCart, getDetail } from '../redux/user-actions';
+import Comments from '../components/our-products/Comments';
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -223,7 +224,7 @@ const DetailPage = () => {
                 }
 
             </div>
-
+            <Comments />
         </>
     );
 };

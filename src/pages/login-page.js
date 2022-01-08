@@ -34,7 +34,7 @@ export default function Registerpage() {
                         ></label>
                     </Link>
 
-                    <div className="text">Войти</div>
+                    <div className="text">Login Page</div>
 
                     <form
                         onSubmit={async (e) => {
@@ -64,7 +64,7 @@ export default function Registerpage() {
                         }}
                     >
                         <div className="data">
-                            <label>Ваш Email</label>
+                            <label>Email</label>
                             <input
                                 onChange={(e) => setEmail(e.target.value)}
                                 name="email"
@@ -72,7 +72,7 @@ export default function Registerpage() {
                             />
                         </div>
                         <div className="data">
-                            <label>Пароль</label>
+                            <label>Password</label>
                             <input
                                 onChange={(e) => setPassword(e.target.value)}
                                 name="password"
@@ -84,16 +84,16 @@ export default function Registerpage() {
                             auth.logSuccess ? (<></>) : (<p style={{ color: "red" }}>{auth.errorMSG}</p>)
                         }
                         <div className="forgot-pass">
-                            <Link to="/forgot">
+                            {/* <Link to="/forgot">
                                 <p href="#/">забыли пароль?</p>
-                            </Link>
+                            </Link> */}
                         </div>
                         <div className="btn">
                             <div className="inner"></div>
-                            <button type="submit">Войти</button>
+                            <button type="submit">Login</button>
                         </div>
                         <div className="signup-link">
-                            Нет аккаунта? <Link to="/register">Регистрация</Link>
+                            have not account? <Link to="/register">Registration</Link>
                         </div>
                     </form>
 

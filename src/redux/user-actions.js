@@ -264,10 +264,11 @@ export const loginUser = (email, password) => {
     }
 }
 
-export const logOut = async () => {
+export const logOut = () => {
     return async dispatch => {
         try {
             localStorage.removeItem('token')
+            localStorage.removeItem('user')
             dispatch({
                 type: "LOGOUT_USER",
                 payload: null
@@ -281,3 +282,77 @@ export const logOut = async () => {
         }
     }
 };
+// !  comment context
+
+export const getComment = (productId) => {
+    return async dispatch => {
+        try {
+            const { data } = await $axios(`comments/${productId}`)
+            dispatch({
+                type: 'GET_COMM',
+                payload: data
+            })
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+}
+export const addComment = (text, owner, productId, userId) => {
+    return async dispatch => {
+        try {
+            let comment = {
+                text,
+                owner,
+                productId,
+                userId
+            }
+            console.log(comment);
+            await $axios.post(`comments/create`, comment)
+            dispatch(getComment(productId))
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+}
+export const deleteComment = (id) => {
+    return async dispatch => {
+        try {
+            await $axios.delete(`comments/${id}`)
+
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+}
+export const getCommentById = (id) => {
+    return async dispatch => {
+        try {
+            const { data } = await $axios(`comments/get/${id}`)
+            dispatch({
+                type: 'GET_COMM_BY_ID',
+                payload: data
+            })
+        }
+        catch (e) {
+            console.log(e);
+        }
+
+    }
+}
+export const editComment = (editedComm, id, productId) => {
+    return async dispatch => {
+        try {
+            let newComm = {
+                text: editedComm
+            }
+            await $axios.patch(`comments/${id}`, newComm)
+            dispatch(getComment(productId))
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+}
