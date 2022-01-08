@@ -1,21 +1,26 @@
 
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 
 import "toastify-js/src/toastify.css";
 import Toastify from "toastify-js";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../redux/user-actions";
-import { useDispatch } from "react-redux";
-
-export default function LoginPage() {
+export default function Registerpage() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false); // eslint-disable-line
+    const auth = useSelector(state => state.userProducts)
+    // const { loginUser, errorMSG, logSuccess } = useContext(authContext)
     const dispatch = useDispatch()
-    // const { login } = useAuth();
+    useEffect(() => {
+        if (auth.logSuccess)
+            navigate('/')
+    }, [auth.logSuccess])
+    let message
     return (
         <>
             <div className="bodyRegister">
@@ -41,7 +46,7 @@ export default function LoginPage() {
                             setIsSubmitting(true);
                             dispatch(loginUser(email, password))
                                 .then((response) => {
-                                    navigate('/')
+
                                 })
                                 .catch((error) => {
                                     console.log(error.message);
@@ -55,6 +60,7 @@ export default function LoginPage() {
                                     }).showToast();
                                 })
                                 .finally(() => setIsSubmitting(false));
+
                         }}
                     >
                         <div className="data">
@@ -74,6 +80,9 @@ export default function LoginPage() {
                                 autoComplete="password"
                             />
                         </div>
+                        {
+                            auth.logSuccess ? (<></>) : (<p style={{ color: "red" }}>{auth.errorMSG}</p>)
+                        }
                         <div className="forgot-pass">
                             <Link to="/forgot">
                                 <p href="#/">забыли пароль?</p>

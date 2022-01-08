@@ -19,7 +19,6 @@ const DetailPage = () => {
         dispatch(getDetail(params.id))
     }, [])
     const detailProduct = useSelector(state => state.userProducts.productDetails)
-
     // snackbar
     const [open, setOpen] = React.useState(false);
 

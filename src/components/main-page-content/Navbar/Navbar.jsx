@@ -7,6 +7,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+
+import SearchIcon from '@mui/icons-material/Search';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 // import MenuIcon from '@mui/icons-material/Menu';
@@ -14,10 +16,11 @@ import MenuItem from '@mui/material/MenuItem';
 import { Badge, InputBase, styled } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { AccountCircle } from '@mui/icons-material';
-import { logOut } from '../../../redux/user-actions';
+import { getProducts, logOut } from '../../../redux/user-actions';
 import { useDispatch } from 'react-redux';
 
 import LogoutIcon from '@mui/icons-material/Logout';
+import $axios from '../../../axiosConfig';
 //
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -64,7 +67,19 @@ export default function Navbar(props) {
     const navigate = useNavigate()
     let currentUser = JSON.parse(localStorage.getItem('user'))
     const dispatch = useDispatch()
+    let object = new URLSearchParams(window.location.search);
+    const [brandValue, setBrandValue] = React.useState("");
+    const filterProducts = (key, value) => {
+        object.set(key, value);
+        let newUrl = `${window.location.pathname}?${object.toString()}`;
+        navigate(newUrl);
+        dispatch(getProducts())
+        setBrandValue(value);
+    }
 
+    React.useEffect(() => {
+        setBrandValue(object.get("brand"));
+    }, [object]);
     // !
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -244,18 +259,16 @@ export default function Navbar(props) {
                                 src=""
                                 alt="" />
                         </Typography>
-                        {/* <Search>
-                                <SearchIconWrapper>
-                                    <SearchIcon />
-                                </SearchIconWrapper>
-                                <StyledInputBase
-                                    onChange={(e) => {
-                                        filterPhones(`q`, e.target.value);
-                                    }}
-                                    placeholder="Search…"
-                                    inputProps={{ 'aria-label': 'search' }}
-                                />
-                            </Search> */}
+                        <Search>
+                            <SearchIconWrapper>
+                                <SearchIcon />
+                            </SearchIconWrapper>
+                            <StyledInputBase
+                                onChange={(e) => filterProducts("q", e.target.value)}
+                                placeholder="Search…"
+                                inputProps={{ 'aria-label': 'search' }}
+                            />
+                        </Search>
 
                         {/* {currentUser ? (
                                 currentUser.email === adminEmail ? (

@@ -1,4 +1,4 @@
-import { CLEAR_PRODUCT, CREATE_PRODUCT, GET_ONE_PRODUCT, GET_PRODUCT } from "./types"
+import { CLEAR_PRODUCT, CREATE_PRODUCT, GET_ONE_PRODUCT, GET_PRODUCT, USER_GET_COUNT, USER_GET_PRODUCT } from "./types"
 
 import $axios from "../axiosConfig"
 const API = "http://localhost:8000/products"
@@ -9,15 +9,6 @@ export const createProduct = (product) => {
         dispatch({
             type: CREATE_PRODUCT,
             payload: product
-        })
-    }
-}
-export const getProducts = () => {
-    return async dispatch => {
-        const products = await $axios.get('products/')
-        dispatch({
-            type: GET_PRODUCT,
-            payload: products.data.rows
         })
     }
 }

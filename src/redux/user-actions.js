@@ -3,18 +3,41 @@ import $axios from "../axiosConfig"
 // import $axios from "../../axiosConfig"
 import jwt_decode from "jwt-decode";
 import { CalcSubPrice, calcTotalPrice } from "../utils/calcPrice"
-import { ADD_AND_DELETE_CART, ADD_AND_DELETE_FAVORITES, CLEAR_COUNT_OF_CART, GET_CART, GET_FAVORITES, USER_GET_DETAIL, USER_GET_PRODUCT } from "./types"
+import { ADD_AND_DELETE_CART, ADD_AND_DELETE_FAVORITES, CLEAR_COUNT_OF_CART, GET_CART, GET_FAVORITES, USER_GET_COUNT, USER_GET_DETAIL, USER_GET_PRODUCT } from "./types"
 const API = "http://localhost:8000/products"
 
-export const getUserProducts = () => {
-    return async (dispatch) => {
-        const { data } = await $axios('products/')
-        dispatch({
-            type: USER_GET_PRODUCT,
-            payload: data.rows
-        })
+export const getProducts = (page = '1') => {
+    return async dispatch => {
+        try {
+            let filter = window.location.search;
+            let filter1 = window.location.search;
+
+            if (filter)
+                filter += `&page=${page}`
+            else
+                filter += `?page=${page}`
+
+            const { data } = await $axios(`products/${filter}`);
+            if (filter1)
+                filter1 += '&limit=10000'
+            else
+                filter1 += '?limit=10000'
+
+            const response = await $axios(`products/${filter1}`);
+            dispatch({
+                type: USER_GET_COUNT,
+                payload: response.data.rows.length
+            })
+            let action = {
+                type: USER_GET_PRODUCT,
+                payload: data.rows,
+            };
+            dispatch(action);
+        } catch (e) {
+            console.log(e);
+        }
     }
-}
+};
 export const getDetail = (id) => {
     return async dispatch => {
         const { data } = await $axios('/products/' + id)
@@ -163,48 +186,98 @@ export const getFavorite = () => {
     };
 };
 // ! authentication
-export const signUpUser = (email, password) => {
+
+export const signUpUser = (email, password, username) => {
     return async dispatch => {
         try {
-            let { data } = await $axios.post('user/signup', { email, password })
+            let res = await $axios('user');
+
+            let { data } = await $axios.post('user/signup', {
+                password,
+                email,
+                username
+            });
             localStorage.setItem('token', JSON.stringify(data))
-            await $axios('/user')
-        }
-        catch (e) {
+            await $axios('user');
+            dispatch({
+                type: "LOGIN_USER",
+                payload: data,
+            });
+            dispatch({
+                type: "LOG_SUCCESS",
+                payload: true,
+            });
+            const user = jwt_decode(data.accessToken);
+            localStorage.setItem('user', JSON.stringify(user))
+        } catch (e) {
+            dispatch({
+                type: "LOG_SUCCESS",
+                payload: false
+            })
+            dispatch({
+                type: "ERROR_MSG",
+                payload: "User with given email has already exists"
+            })
             console.log(e);
         }
     }
-}
+};
 export const loginUser = (email, password) => {
     return async dispatch => {
         try {
-            console.log(email, password);
+            let res = await $axios('user');
+            // if (user) {
+            // if (user.password !== password) {
+            //     console.log("wrong password");
+            //     return
+            // }
             let { data } = await $axios.post('user/login', {
                 password,
                 email,
             });
-            let decoded = jwt_decode(data.accessToken);
             localStorage.setItem('token', JSON.stringify(data))
             await $axios('user');
-
-            localStorage.setItem('user', JSON.stringify(decoded))
+            dispatch({
+                type: "LOGIN_USER",
+                payload: data,
+            });
+            dispatch({
+                type: "LOG_SUCCESS",
+                payload: true,
+            });
+            const user = jwt_decode(data.accessToken);
+            localStorage.setItem('user', JSON.stringify(user))
 
             // }
         } catch (error) {
-            console.log(error + "    qweqweqweqwe");
+            dispatch({
+                type: "LOG_SUCCESS",
+                payload: false
+            })
+            dispatch({
+                type: "ERROR_MSG",
+                payload: 'Wrong mail or password'
+            })
+            console.log(error + "qweqweqweqwe");
+            // console.log(errorMSG + "qweqweqweqwe");
         }
     }
-
 }
 
-export const logOut = () => {
-    try {
-        localStorage.removeItem('token')
-        localStorage.removeItem('user')
-
-
-    } catch (e) {
-        console.log(e);
+export const logOut = async () => {
+    return async dispatch => {
+        try {
+            localStorage.removeItem('token')
+            dispatch({
+                type: "LOGOUT_USER",
+                payload: null
+            })
+            dispatch({
+                type: "LOG_SUCCESS",
+                payload: false
+            })
+        } catch (e) {
+            console.log(e);
+        }
     }
 };
-

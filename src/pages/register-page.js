@@ -1,21 +1,25 @@
-import { useState } from "react";
+
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import React from "react";
 import "toastify-js/src/toastify.css";
 import Toastify from "toastify-js";
 import { Link } from "react-router-dom";
-import { signUpUser } from "../redux/user-actions";
-import { useDispatch } from "react-redux";
+import { authContext } from "../contexts/AuthContext";
+import { useDispatch, useSelector } from "react-redux";
 export default function RegisterPage() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false)// eslint-disable-line
-    //
-    // const useAuth = [{ register, signInWithGoogle }]
-    //
-    // const { register, signInWithGoogle } = useAuth();
+    const { signUpUser, logSuccess, errorMSG } = useContext(authContext)
+    const auth = useSelector(state => state.userProducts)
     const dispatch = useDispatch()
+    useEffect(() => {
+        if (auth.logSuccess)
+            navigate('/')
+    }, [auth.logSuccess])
     return (
         <>
             <div className="bodyRegister">
@@ -30,6 +34,8 @@ export default function RegisterPage() {
                         ></label>
                     </Link>
                     <div className="text">Регистрация</div>
+
+
                     <form
                         onSubmit={async (e) => {
                             e.preventDefault();
@@ -38,15 +44,13 @@ export default function RegisterPage() {
 
                             }
                             setIsSubmitting(true);
-                            dispatch(signUpUser(email, password))
+                            dispatch(signUpUser(email, password, username))
                                 .then((response) => {
-                                    navigate('/');
                                 })
                                 .catch((error) => {
                                     console.log(error.message);
                                     Toastify({
-                                        // text: error.message,
-                                        text: 'Неправильный пароль или емаил',
+                                        text: error.message,
                                         className: "error",
                                         style: {
                                             background:
@@ -70,6 +74,16 @@ export default function RegisterPage() {
                             />
                         </div>
                         <div className="data">
+                            <label>Ваш Username</label>
+                            <input
+                                // value="email"
+                                onChange={(e) => setUsername(e.target.value)}
+                                name="username"
+                                type="text"
+                            // required
+                            />
+                        </div>
+                        <div className="data">
                             <label>Ваш пароль</label>
                             <input
                                 // value="password"
@@ -84,6 +98,9 @@ export default function RegisterPage() {
                         <div className="forgot-pass">
 
                         </div>
+                        {
+                            auth.logSuccess ? (<></>) : (<p style={{ color: "red" }}>{auth.errorMSG}</p>)
+                        }
                         <div className="btn">
                             <div className="inner"></div>
                             <button type="submit">Регистрация</button>

@@ -13,7 +13,9 @@ import Grid from '@mui/material/Grid';
 import { Container } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteProduct, getProducts } from '../../redux/actions';
+import { deleteProduct } from '../../redux/actions';
+import Pagination from '../our-products/pagination';
+import { getProducts } from '../../redux/user-actions';
 
 const AdminCard = () => {
     const dispatch = useDispatch()
@@ -70,6 +72,7 @@ const AdminCard = () => {
 
                     }
                 </Grid>
+                <Pagination />
             </Container >
         </div>
     );

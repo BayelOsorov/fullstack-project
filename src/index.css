@@ -318,3 +318,46 @@ form .signup-link a:hover {
 }
 
 /* signin btn */
+
+/* Pagination */
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination ul {
+    display: flex;
+    list-style-type: none;
+}
+
+.pagination button {
+    background-color: unset;
+    border-radius: 4px;
+    border: none;
+    color: black;
+    float: left;
+    padding: 6px 25px;
+    text-decoration: none;
+}
+
+.pagination button:hover {
+    background-color: #ddd;
+    transition-duration: .5s;
+}
+
+.cur-page-btn {
+    background-color: #4CAF50 !important;
+    color: white;
+}
+
+/* Radio btn */
+
+.radio-content {
+    display: flex;
+    justify-content: center;
+}
+
+.radio-btn {
+    text-align: center;
+}

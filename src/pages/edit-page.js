@@ -25,6 +25,7 @@ const EditPage = () => {
         dispatch(getProductToEdit(params.id))
     }, [])
     const productToEdit = useSelector(state => state.products.productToEdit)
+
     return (
         <div className='edit-page' >
             {
